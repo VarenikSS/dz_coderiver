@@ -1,0 +1,208 @@
+---
+pages:[1,2,3]
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+<div class="container">
+	<nav class="nav">
+		<div class="nav__logo">
+			<a href="">JET<span>RO</span></a>
+		</div>
+		<ul class="nav__list"> 
+		{% import "data/data.html" as data %}
+		{% for tab in data.navList %}
+			<li class="nav__litem {{tab.active}}"><a href="{{tab.url}}">{{tab.title}}</a></li>
+		{% endfor %}
+		</ul>
+	</nav>
+	<header class="header bgc">
+		<h1 class="header__title">Blog</h1>
+	</header>
+	<main>
+		<aside>
+			<div class="about">
+				<div class="about__title">
+					<span>AbouT  Jetro</span>
+				</div>
+				<div class="about__text">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praese nt libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elemen tum imperdiet. Duis sagittis ipsum.
+				</div>
+			</div>
+			<div class="categories">
+				<div class="categories__title">
+					<span>Categories</span>
+				</div>
+				<div class="categories__text">
+					<ul class="categories__list">
+						<li><a href="" class="categories__litem">Video (3)</a></li>
+						<li><a href="" class="categories__litem">Sports (5)</a></li>
+						<li><a href="" class="categories__litem">Media (2)</a></li>
+						<li><a href="" class="categories__litem">Entertainment (7)</a></li>
+						<li><a href="" class="categories__litem">Life (4)</a></li>
+						<li><a href="" class="categories__litem">Super Cool Stuff (8)</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gallery">
+				<div class="gallery__title">
+					<span>Photo  Gallery</span>
+				</div>
+				<div class="gallery__board">
+					<div class="gallery__img"><a href="../img/gallery/model1.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model1.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model8.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model8.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model3.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model3.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model4.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model4.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model5.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model5.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model6.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model6.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model7.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model7.jpg" alt=""></a></div>
+					<div class="gallery__img"><a href="../img/gallery/model8.jpg" data-lightbox="galleryAside"><img src="../img/gallery/model8.jpg" alt=""></a></div>
+				</div>
+			</div>
+		</aside>
+		<div class="content">
+			{% for item in data.contentList %}
+			<div class="post">
+			{% if item.type == 'nonimgpost' %}
+				<div class="post__icon">
+					<img src="{{item.icon}}" alt="">
+				</div>
+				<div class="postdescr">
+					<h2 class="postdescr__title"><a href="{{item.url}}">{{item.title}}</a></h2>
+					<div class="postdescr__adress">
+						www.bestpsdfreebies.com
+					</div>
+					<div class="postdescr__text">
+						<a href="{{item.url}}">
+							{% for text in item.text %}
+							<p>{{text}}</p>
+							{% endfor %}
+						</a>
+					</div>	
+				</div>
+			{% elseif item.type == 'quote'%}
+				<div class="post__icon">
+					<img src="{{item.icon}}" alt="">
+				</div>
+				<div class="quotation">
+					<span>&ldquo;</span>
+					<div class="quotation__text">
+						{{item.text}}
+					</div>
+				</div>
+			{% else %}
+				<div class="post__icon">
+					<img src="{{item.icon}}" alt="">
+				</div>
+				<div class="post__img">
+					{% if item.img.length > 1 %}
+					<div class="slider">
+						<div class="slider__display">
+							{% for img in item.img %}
+							<img class="slider__img" src="{{img}}" alt="">
+							{% endfor %}
+						</div>
+						<div class="slider__next"></div>
+						<div class="slider__prev"></div>
+					</div>
+					
+					{% else %}
+					<a href="{{item.url}}"><img src="{{item.img[0]}}" alt=""></a>
+					{% endif %}
+				</div>
+				<div class="post__meta">
+					<div class="data">
+						<div class="data__title">
+							Date 
+						</div>
+						<div class="data__value">
+							<a href="">{{item.date}}</a>
+						</div>
+					</div>
+					<div class="data">
+						<div class="data__title">
+							Tags
+						</div>
+						<div class="data__value">
+							<a href="">{{item.tags}}</a>
+						</div>
+					</div>
+					<div class="data">
+						<div class="data__title">
+							Comments
+						</div>
+						<div class="data__value">
+							<a href="">{{item.comments}}</a>
+						</div>
+					</div>
+				</div>
+				<div class="post__summary">
+					<div class="postdescr">
+						<h2 class="postdescr__title"><a href="{{item.url}}">{{item.title}}</a></h2>
+						<div class="postdescr__text">
+							<a href="{{item.url}}">
+								{% for text in item.text %}
+								<p>{{text}}</p>
+								{% endfor %}
+							</a>
+						</div>	
+					</div>
+				</div>
+				{% endif %}
+				<div class="post__borderb">
+				</div>
+			</div>
+			{% endfor %}
+			<div class="pagination">
+				
+				{% for page in data.pages %}
+				<a class="pagination__page {{page.active}}" href="{{page.url}}">
+					{{page.num}}
+				</a>
+				{% endfor %}
+			</div>	
+		</div>
+	</main>
+	<footer class="footer bgc">
+		<div class="wrapper">
+			<div class="footer__about">
+				<div class="about">
+					<div class="about__title about__title--white">
+						About  Jetro
+					</div>
+					<div class="about__text">
+						<p>Lorem ipsum dolor sit amet, malorum recteque reprehendunt ea vel. Urbanitas adolescens vim te, per at tritani aperiri. Adhuc invenire convenire his ea. Id mei vitae denique, in eam commodo veritus disputando. </p>
+						<p>Pro et erant delicata, eu vim essent imperdiet accommodare, dictas deseruisse ius an. Solet everti definitionem id ius, sonet oporteat cu vim.</p>
+					</div>
+				</div>
+			</div>
+			<div class="footer__widget">
+				<div class="widget">
+					<div class="widget__title">
+						Twitter  Widget
+					</div>
+					<div class="widget__block">
+						<div class="widget__bltext">
+							<a href="">@pixelmater</a> What an awesome design with great functionality :)
+						</div>
+						<div class="widget__bltime">
+							<a href="">about 1 hour ago</a>
+						</div>
+					</div>
+					<div class="widget__block">
+						<div class="widget__bltext">
+							<a href="">@designdude</a> What an awesome design with great functionality :)
+						</div>
+						<div class="widget__bltime">
+							<a href="">about 2 hour ago</a>
+						</div>
+					</div>
+					<div class="widget__follow">
+						Follow <a href="">@bestpsdfreebies</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+{% endblock %}
